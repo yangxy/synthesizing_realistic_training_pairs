@@ -1,4 +1,4 @@
-# synthesizing_realistic_training_pairs# Synthesizing Realistic Image Restoration Training Pairs: A Diffusion Approach
+# Synthesizing Realistic Image Restoration Training Pairs: A Diffusion Approach
 
 [Paper](https://arxiv.org/abs/2303.06994)
 

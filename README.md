@@ -6,4 +6,52 @@
 _<sup>1</sup>[DAMO Academy, Alibaba Group](https://damo.alibaba.com), Hangzhou, China_  
 _<sup>2</sup>[Department of Computing, The Hong Kong Polytechnic University](http://www.comp.polyu.edu.hk), Hong Kong, China_
 
-# Code and dataset will be released in next 2-3 weeks.
+## Sorry for the delay. DID and pretrained models will be released soon. I am busy with another project [PASD](https://github.com/yangxy/PASD).
+
+## News
+(2023-09-07) Upload source codes.
+
+## Usage
+- Clone this repository:
+```bash
+git clone https://github.com/yangxy/synthesizing_realistic_training_pairs.git
+cd synthesizing_realistic_training_pairs
+```
+
+- Prepare LQ/HQ datasets, e.g., DID/DIV2K, and put them into ``datasets/``.
+
+- Train a DDPM that generates realistic LQ images.
+```bash
+bash ./train_ddpm.sh
+```
+
+- Extrat HQ images to subimages.
+```bash
+python scripts/extract_subimages.py # change the values of opt, especially opt['input_folder']/opt['save_folder'] accordingly
+```
+
+- Synthesize realistic LQ images with the help of the pre-trained DDPM.
+```bash
+python test_ddpm_img2img.py
+```
+
+- Train your own SR models using the synthesized HQ-LQ pairs
+
+## Citation
+If our work is useful for your research, please consider citing:
+
+    @inproceedings{yang2023syn,
+	    title={Synthesizing Realistic Image Restoration Training Pairs: A Diffusion Approach},
+	    author={Tao Yang, Peiran Ren, Xuansong Xie, and Lei Zhang},
+	    booktitle={Arxiv},
+	    year={2023}
+    }
+    
+## License
+© Alibaba, 2023. For academic and non-commercial use only.
+
+## Acknowledgments
+Our project is based on [diffusers](https://github.com/huggingface/diffusers)
+
+## Contact
+If you have any questions or suggestions about this paper, feel free to reach me at yangtao9009@gmail.com.

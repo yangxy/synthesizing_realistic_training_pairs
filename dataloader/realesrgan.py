@@ -106,7 +106,7 @@ class RealESRGAN_degradation(object):
 
     def random_augment(self, img_gt):
         # random horizontal flip
-        img_gt, status = augment(img_gt, hflip=True, rotation=False, return_status=True)
+        img_gt, status = augment(img_gt, hflip=False, rotation=False, return_status=True)
 
         # random color jitter 
         if np.random.uniform() < self.opt['color_jitter_prob']:

@@ -39,7 +39,7 @@ def main(args):
 
         LR_image_init = LR_image_init * 2.0 - 1.0 # [0,1] -> [-1,1]
         # run pipeline in inference (sample random noise and denoise)
-        strength = max(random.random() * args.strength, 1.0/args.num_inference_steps) # max_diffusion_step is 250=1000*0.25
+        strength = max(random.random() * args.max_strength, 1.0/args.num_inference_steps) # max_diffusion_step is 250=1000*0.25
         try:
             images = pipeline(
                 generator=generator,
@@ -65,7 +65,7 @@ if __name__ == "__main__":
     parser.add_argument("--mixed_precision", type=str, default="no")
     parser.add_argument("--num_inference_steps", type=int, default=50)
     parser.add_argument("--eval_batch_size", type=int, default=1)
-    parser.add_argument("--strength", type=float, default=0.25)
+    parser.add_argument("--max_strength", type=float, default=0.25)
     parser.add_argument("--resolution", type=int, default=256)
     parser.add_argument("--seed", type=int, default=None)
     args = parser.parse_args()

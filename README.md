@@ -6,9 +6,12 @@
 _<sup>1</sup>[DAMO Academy, Alibaba Group](https://damo.alibaba.com), Hangzhou, China_  
 _<sup>2</sup>[Department of Computing, The Hong Kong Polytechnic University](http://www.comp.polyu.edu.hk), Hong Kong, China_
 
-## Sorry for the delay. DID and pretrained models will be released soon. I am busy with another project [PASD](https://github.com/yangxy/PASD).
+## Real-ISR
+<img src="samples/0014.gif" width="390px"/> <img src="samples/dped_crop00061.gif" width="390px"/>
+<img src="samples/00003.gif" width="390px"/> <img src="samples/00017_gray.gif" width="390px"/>
 
 ## News
+(2023-09-13) Upload pre-trained models.
 (2023-09-07) Upload source codes.
 
 ## Usage
@@ -18,24 +21,32 @@ git clone https://github.com/yangxy/synthesizing_realistic_training_pairs.git
 cd synthesizing_realistic_training_pairs
 ```
 
-- Prepare LQ/HQ datasets, e.g., DID/DIV2K, and put them into ``datasets/``.
+- Prepare LQ/HQ datasets, e.g., [DID_natural](https://public-vigen-video.oss-cn-shanghai.aliyuncs.com/robin/models/SR_models/did_natural_urls.txt)/[DF2K_OST](https://www.kaggle.com/datasets/thaihoa1476050/df2k-ost), and put them into ``datasets/``. Please send me email for DID_face dataset.
 
 - Train a DDPM that generates realistic LQ images.
 ```bash
 bash ./train_ddpm.sh
 ```
 
-- Extrat HQ images to subimages.
+Download our pre-trained model [ddpm_did_256](https://public-vigen-video.oss-cn-shanghai.aliyuncs.com/robin/models/SR_models/checkpoint-50000.zip) trained with a resolution of ``256x256``. 
+
+- (Optional) Extrat HQ images to subimages in order to match your train size.
 ```bash
 python scripts/extract_subimages.py # change the values of opt, especially opt['input_folder']/opt['save_folder'] accordingly
 ```
 
 - Synthesize realistic LQ images with the help of the pre-trained DDPM.
 ```bash
-python test_ddpm_img2img.py
+python test_ddpm_img2img.py --max_strength 0.2
 ```
 
 - Train your own SR models using the synthesized HQ-LQ pairs
+
+- Test your SR model.
+
+You can download our pre-trained models [RRDB+](https://public-vigen-video.oss-cn-shanghai.aliyuncs.com/robin/models/SR_models/RRDB%2B.pth). 
+
+#### We re-train our models due to the whole project is re-builed on [diffusers](https://github.com/huggingface/diffusers). The outputs may differ from the results presented in the paper. We are still working on it and the released models woule be updated at any time. 
 
 ## Citation
 If our work is useful for your research, please consider citing:
